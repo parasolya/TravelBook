@@ -4,42 +4,72 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
+import React, { useState } from "react";
 
 export const LoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const sighnIn = () => {};
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Увійти</Text>
-      <TextInput
-        style={styles.inputBox}
-        placeholder="Адреса електронної пошти"
-        // onChangeText={newText => setText(newText)}
-      />
-      <View>
-        <TextInput
-          style={styles.inputBox}
-          placeholder="Пароль"
-          // onChangeText={newText => setText(newText)}
-        />
-        <Text style={styles.textClickInInput}>Показати</Text>
-      </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          console.log("You tapped the Decrypt button!");
-        }}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        style={styles.container}
       >
-        <Text style={styles.buttonText}>Увійти</Text>
-      </TouchableOpacity>
-      <View style={styles.containerTextClick}>
-        <Text style={styles.textClick}>Немає акаунту? </Text>
-        <Text style={[styles.textClick, styles.textUnderline]}>Зареєструватися</Text>
-      </View>
-    </View>
+        <View style={styles.containerForm}>
+          <Text style={styles.title}>Увійти</Text>
+          <TextInput
+            style={styles.inputBox}
+            value={email}
+            placeholder="Адреса електронної пошти"
+            onChangeText={(email) => setEmail(email)}
+          />
+          <View>
+            <TextInput
+              style={styles.inputBox}
+              value={password}
+              placeholder="Пароль"
+              onChangeText={(password) => setPassword(password)}
+            />
+            <Text style={styles.textClickInInput}>Показати</Text>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={sighnIn}>
+            <Text style={styles.buttonText}>Увійти</Text>
+          </TouchableOpacity>
+          <View style={styles.containerTextClick}>
+            <Text style={styles.textClick}>Немає акаунту? </Text>
+            <Text
+              style={[styles.textClick, styles.textUnderline]}
+              onPress={() => {}}
+            >
+              Зареєструватися
+            </Text>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 323,
+    justifyContent: "flex-end",
+  },
+  containerForm: {
+    flex: 1,
+    alignItems: "center",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: "#FFFFFF",
+  },
   title: {
     fontFamily: "Roboto-Medium",
     color: "black",
@@ -49,14 +79,6 @@ const styles = StyleSheet.create({
     marginTop: 92,
 
     marginBottom: 33,
-  },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    marginTop: 323,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    backgroundColor: "#FFFFFF",
   },
   background: {
     flex: 1,
@@ -105,10 +127,10 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   containerTextClick: {
-  flexDirection: 'row',
-//   gap: 
+    flexDirection: "row",
+    //   gap:
   },
   textUnderline: {
-    textDecorationLine: 'underline',
-  }
+    textDecorationLine: "underline",
+  },
 });

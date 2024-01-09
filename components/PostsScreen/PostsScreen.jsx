@@ -1,5 +1,9 @@
 import { StyleSheet } from "react-native";
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity,
+  KeyboardAvoidingView, // новий імпорт
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard, } from "react-native";
 
 export const PostsScreen = () => {
   return (

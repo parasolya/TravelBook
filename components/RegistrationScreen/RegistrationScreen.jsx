@@ -7,48 +7,83 @@ import {
   Image,
   Button,
   TouchableOpacity,
+  KeyboardAvoidingView, 
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+  
 } from "react-native";
+import React, {useState} from "react";
 
 // import inputBg from '../../images/'
 
 export const RegistrationScreen = () => {
+  const [login, setLogin]= useState('');
+  const [email, setEmail]= useState('');
+  const [password, setPassword]=useState('');
+
+  const sighnUp = () => {};
+
   return (
-    <View style={styles.container}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+
+    <View style={styles.containerForm}>
     <Image source={require('../../images/addPhoto.png')} style={styles.addPhoto}></Image>
       <Text style={styles.title}>Реєстрація</Text>
       <TextInput
         style={styles.inputBox}
+        value={login}
         placeholder="Логін"
-        // onChangeText={newText => setText(newText)}
+        onChangeText={login => setLogin(login)}
+        // defaultValue={login}
       />
       <TextInput
         style={styles.inputBox}
+        value={email}
         placeholder="Адреса електронної пошти"
-        // onChangeText={newText => setText(newText)}
+        onChangeText={email => setEmail(email)}
       />
       <View>
       <TextInput
         style={styles.inputBox}
-        placeholder="Пароль"
-        // onChangeText={newText => setText(newText)}
+        value={password}
+        placeholder="Пароль"       
+        onChangeText={password => setPassword(password)}
       />
       <Text style={styles.textClickInInput}>Показати</Text>
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {
-          console.log("You tapped the Decrypt button!");
-        }}
+        onPress={sighnUp}
       >
         <Text style={styles.buttonText}>Зареєструватися</Text>
       </TouchableOpacity>
 <Text style={styles.textClick}>Вже є акаунт? Увійти</Text>
-      {/* </ImageBackground> */}
-    </View>
+</View>
+</KeyboardAvoidingView>
+        </TouchableWithoutFeedback>  
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 263,  
+    justifyContent: "flex-end",
+  },
+
+  containerForm: {
+    flex: 1,
+    position: 'relative',
+    alignItems: "center",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: "#FFFFFF",    
+  },
   title: {
     fontFamily: 'Roboto-Medium',
     color: "black",
@@ -59,20 +94,7 @@ const styles = StyleSheet.create({
 
     marginBottom: 33,
   },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    marginTop: 263,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    backgroundColor: "#FFFFFF",
-  },
-  background: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-  },
   inputBox: {
-    // alignItems: 'center',
     fontFamily: 'Roboto-Regular',
     fontSize: 16,
     borderColor: "#E8E8E8",
@@ -86,10 +108,12 @@ const styles = StyleSheet.create({
     
   },
   button: {    
+    // position: 'absolute',
+    // top: 100,
     width: 343,
     alignItems: "center",
     justifyContent: 'center',
-    width: 343,
+    // width: 343,
     height: 50,
     backgroundColor: "#FF6C00",
     borderRadius: 100,
