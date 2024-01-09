@@ -21,6 +21,7 @@ export const RegistrationScreen = () => {
   const [login, setLogin]= useState('');
   const [email, setEmail]= useState('');
   const [password, setPassword]=useState('');
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
   const sighnUp = () => {};
 
@@ -31,7 +32,7 @@ export const RegistrationScreen = () => {
       style={styles.container}
     >
 
-    <View style={styles.containerForm}>
+    <View style={{...styles.form, paddingBottom: isShowKeyboard ? 10 : 78 }}>
     <Image source={require('../../images/addPhoto.png')} style={styles.addPhoto}></Image>
       <Text style={styles.title}>Реєстрація</Text>
       <TextInput
@@ -40,12 +41,14 @@ export const RegistrationScreen = () => {
         placeholder="Логін"
         onChangeText={login => setLogin(login)}
         // defaultValue={login}
+        onFocus={() => {setIsShowKeyboard(true)}}
       />
       <TextInput
         style={styles.inputBox}
         value={email}
         placeholder="Адреса електронної пошти"
         onChangeText={email => setEmail(email)}
+        onFocus={() => {setIsShowKeyboard(true)}}
       />
       <View>
       <TextInput
@@ -53,6 +56,7 @@ export const RegistrationScreen = () => {
         value={password}
         placeholder="Пароль"       
         onChangeText={password => setPassword(password)}
+        onFocus={() => {setIsShowKeyboard(true)}}
       />
       <Text style={styles.textClickInInput}>Показати</Text>
       </View>
@@ -73,16 +77,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 263,  
-    justifyContent: "flex-end",
+    justifyContent: "flex-end",    
   },
 
-  containerForm: {
+  form: {
     flex: 1,
     position: 'relative',
     alignItems: "center",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    backgroundColor: "#FFFFFF",    
+    backgroundColor: "#FFFFFF",  
   },
   title: {
     fontFamily: 'Roboto-Medium',
@@ -91,7 +95,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     textAlign: "center",
     marginTop: 92,
-
     marginBottom: 33,
   },
   inputBox: {
@@ -107,13 +110,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     
   },
-  button: {    
-    // position: 'absolute',
-    // top: 100,
-    width: 343,
+  button: {   
     alignItems: "center",
     justifyContent: 'center',
-    // width: 343,
+    width: 343,
     height: 50,
     backgroundColor: "#FF6C00",
     borderRadius: 100,

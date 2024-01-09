@@ -14,6 +14,8 @@ import React, { useState } from "react";
 export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+
   const sighnIn = () => {};
 
   return (
@@ -22,13 +24,14 @@ export const LoginScreen = () => {
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.container}
       >
-        <View style={styles.containerForm}>
+        <View style={{...styles.form, paddingBottom: isShowKeyboard ? 10 : 144 }}>
           <Text style={styles.title}>Увійти</Text>
           <TextInput
             style={styles.inputBox}
             value={email}
             placeholder="Адреса електронної пошти"
             onChangeText={(email) => setEmail(email)}
+            onFocus={() => {setIsShowKeyboard(true)}}
           />
           <View>
             <TextInput
@@ -36,6 +39,7 @@ export const LoginScreen = () => {
               value={password}
               placeholder="Пароль"
               onChangeText={(password) => setPassword(password)}
+              onFocus={() => {setIsShowKeyboard(true)}}
             />
             <Text style={styles.textClickInInput}>Показати</Text>
           </View>
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
     paddingTop: 323,
     justifyContent: "flex-end",
   },
-  containerForm: {
+  form: {
     flex: 1,
     alignItems: "center",
     borderTopLeftRadius: 25,

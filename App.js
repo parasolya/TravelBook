@@ -31,8 +31,8 @@ export default function App() {
     <View>
       <ImageBackground source={BG} resizeMode="stretch" style={styles.image}>
         {/* <RegistrationScreen /> */}
-        {/* <LoginScreen /> */}
-        <PostsScreen />
+        <LoginScreen />
+        {/* <PostsScreen /> */}
       </ImageBackground>
     </View>
   );
@@ -41,10 +41,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
+    backgroundColor: "#FFFFFF",
   },
   image: {
     flex: 1,
     width: "100%",
     position: "absolute",
+    // justifyContent: "flex-end",    
   },
 });
