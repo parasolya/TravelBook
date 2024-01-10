@@ -23,7 +23,14 @@ export const RegistrationScreen = () => {
   const [password, setPassword]=useState('');
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
-  const sighnUp = () => {};
+  const sighnUp = () => {  
+      setIsShowKeyboard(false);
+      console.log("user has", `login: ${login} email: ${email} + password: ${password}`);
+      // Alert.alert("user has", `email: ${email} + password: ${password}`);
+      setLogin('');
+      setEmail('');
+      setPassword('');  
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -42,6 +49,7 @@ export const RegistrationScreen = () => {
         onChangeText={login => setLogin(login)}
         // defaultValue={login}
         onFocus={() => {setIsShowKeyboard(true)}}
+        name='login'
       />
       <TextInput
         style={styles.inputBox}
@@ -49,6 +57,7 @@ export const RegistrationScreen = () => {
         placeholder="Адреса електронної пошти"
         onChangeText={email => setEmail(email)}
         onFocus={() => {setIsShowKeyboard(true)}}
+        name='email'
       />
       <View>
       <TextInput
@@ -57,6 +66,7 @@ export const RegistrationScreen = () => {
         placeholder="Пароль"       
         onChangeText={password => setPassword(password)}
         onFocus={() => {setIsShowKeyboard(true)}}
+        name='password'
       />
       <Text style={styles.textClickInInput}>Показати</Text>
       </View>

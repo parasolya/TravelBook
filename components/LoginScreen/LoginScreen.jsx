@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert
 } from "react-native";
 import React, { useState } from "react";
 
@@ -16,7 +17,12 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
-  const sighnIn = () => {};
+  const sighnIn = () => {
+    console.log("user has", `email: ${email} + password: ${password}`);
+    // Alert.alert("user has", `email: ${email} + password: ${password}`);
+    setEmail('');
+    setPassword('');
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -26,12 +32,14 @@ export const LoginScreen = () => {
       >
         <View style={{...styles.form, paddingBottom: isShowKeyboard ? 10 : 144 }}>
           <Text style={styles.title}>Увійти</Text>
+
           <TextInput
             style={styles.inputBox}
             value={email}
             placeholder="Адреса електронної пошти"
             onChangeText={(email) => setEmail(email)}
             onFocus={() => {setIsShowKeyboard(true)}}
+            name='email'
           />
           <View>
             <TextInput
@@ -40,6 +48,7 @@ export const LoginScreen = () => {
               placeholder="Пароль"
               onChangeText={(password) => setPassword(password)}
               onFocus={() => {setIsShowKeyboard(true)}}
+              name='password'
             />
             <Text style={styles.textClickInInput}>Показати</Text>
           </View>

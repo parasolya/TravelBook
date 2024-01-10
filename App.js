@@ -30,8 +30,8 @@ export default function App() {
   return (
     <View>
       <ImageBackground source={BG} resizeMode="stretch" style={styles.image}>
-        {/* <RegistrationScreen /> */}
-        <LoginScreen />
+        <RegistrationScreen />
+        {/* <LoginScreen /> */}
         {/* <PostsScreen /> */}
       </ImageBackground>
     </View>
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: "100%",
-    position: "absolute",
-    // justifyContent: "flex-end",    
+    position: "absolute",   
   },
 });

@@ -1,9 +1,15 @@
 import { StyleSheet } from "react-native";
-import { View, Text, Image, TextInput, TouchableOpacity,
-  KeyboardAvoidingView, // новий імпорт
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
-  Keyboard, } from "react-native";
+  Keyboard,
+} from "react-native";
 
 export const PostsScreen = () => {
   return (
@@ -30,22 +36,24 @@ export const PostsScreen = () => {
       </View>
       {/* Inputs */}
       <View style={styles.containerInput}>
-      <TextInput
-        style={styles.inputBox}
-        placeholder="Назва..."
-        placeholderTextColor="#BDBDBD"
-        // onChangeText={newText => setText(newText)}
-      />
+        <TextInput
+          style={styles.inputBox}
+          placeholder="Назва..."
+          placeholderTextColor="#BDBDBD"
+          // onChangeText={newText => setText(newText)}
+        />
       </View>
       <View style={[styles.containerInput, styles.containerLocality]}>
-      <Image source={require('../../images/map-pin.png')} style={styles.iconMapPin}></Image>
+        <Image
+          source={require("../../images/map-pin.png")}
+          style={styles.iconMapPin}
+        ></Image>
         <TextInput
           style={[styles.inputBox, styles.inputlocality]}
           placeholder="Місцевість..."
           // onChangeText={newText => setText(newText)}
           placeholderTextColor="#BDBDBD"
         />
-        
       </View>
       <TouchableOpacity
         style={styles.button}
@@ -57,7 +65,7 @@ export const PostsScreen = () => {
       </TouchableOpacity>
       {/* Footer */}
       <View style={styles.containerTrash}>
-      <Image source={require('../../images/trash.png')} ></Image>      
+        <Image source={require("../../images/trash.png")}></Image>
       </View>
     </View>
   );
@@ -112,35 +120,27 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   inputBox: {
-    // alignItems: 'center',
     fontFamily: "Roboto-Regular",
     fontSize: 16,
     width: 343,
     height: 50,
-    // padding: 16,
-   
   },
-  //       containerInput: {
-  // marginTop: 32,
-  //       }
   iconMapPin: {
-    position: 'absolute',
+    position: "absolute",
     marginRight: 20,
     width: 24,
-height: 24,
+    height: 24,
   },
   containerInput: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderBottomColor: "#E8E8E8",
     borderBottomWidth: 1,
-    // backgroundColor:'grey'
   },
   containerLocality: {
     marginTop: 16,
   },
   inputlocality: {
-    
     paddingLeft: 28,
   },
   button: {
@@ -160,11 +160,11 @@ height: 24,
   },
   containerTrash: {
     width: 70,
-height: 40,
-backgroundColor: '#F6F6F6',
-alignItems: 'center',
-justifyContent: 'center',
-borderRadius: 20,
-marginTop: 120,
-  }
+    height: 40,
+    backgroundColor: "#F6F6F6",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+    marginTop: 120,
+  },
 });
