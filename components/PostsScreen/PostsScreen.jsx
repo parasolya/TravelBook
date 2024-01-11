@@ -12,6 +12,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { List } from '../shared/List/List'
 
 export const PostsScreen = () => {
   const [userPhoto, setUserPhoto] = useState(require("../../images/avatar.jpg"));
@@ -30,6 +31,9 @@ export const PostsScreen = () => {
           <Text style={styles.textEmail}>{userEmail}</Text>
         </View>
         </View>
+
+        <List />
+
       </View>
       
   );

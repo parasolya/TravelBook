@@ -113,8 +113,8 @@ export const RegistrationScreen = () => {
           <Text
             style={styles.textClick}
             onPress={() => {
-              navigation.navigate("LoginScreen");
-              // navigation.navigate("PostsScreen");
+              // navigation.navigate("LoginScreen");
+              navigation.navigate("PostsScreen");
               // navigation.navigate("CreatePostsScreen");
             }}
           >
