@@ -11,11 +11,14 @@ import {
   Alert
 } from "react-native";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+
+  const navigation = useNavigation();
 
   const sighnIn = () => {
     console.log("user has", `email: ${email} + password: ${password}`);
@@ -59,7 +62,7 @@ export const LoginScreen = () => {
             <Text style={styles.textClick}>Немає акаунту? </Text>
             <Text
               style={[styles.textClick, styles.textUnderline]}
-              onPress={() => {}}
+              onPress={() => {navigation.navigate('RegistrationScreen')}}
             >
               Зареєструватися
             </Text>

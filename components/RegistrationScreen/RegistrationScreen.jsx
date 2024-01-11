@@ -7,99 +7,151 @@ import {
   Image,
   Button,
   TouchableOpacity,
-  KeyboardAvoidingView, 
+  KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  
 } from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
+import BG from "../../images/photoBG.png";
 
 // import inputBg from '../../images/'
 
 export const RegistrationScreen = () => {
-  const [login, setLogin]= useState('');
-  const [email, setEmail]= useState('');
-  const [password, setPassword]=useState('');
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [isFocused, setIsFocused] = useState({
+    login: false,
+    email: false,
+    password: false,
+  });
 
-  const sighnUp = () => {  
-      setIsShowKeyboard(false);
-      console.log("user has", `login: ${login} email: ${email} + password: ${password}`);
-      // Alert.alert("user has", `email: ${email} + password: ${password}`);
-      setLogin('');
-      setEmail('');
-      setPassword('');  
+  const navigation = useNavigation();
+
+  const handleFocus = (inputName) => () => {
+    setIsFocused((prevState) => ({
+      ...prevState, 
+      [inputName]: true,
+    }));
+    setIsShowKeyboard(true);
+  };
+  
+  const handleBlur = (inputName) => () => {
+    setIsFocused((prevState) => ({
+      ...prevState,
+      [inputName]: false,
+    }));
+  };
+  
+  const sighnUp = () => {
+    setIsShowKeyboard(false);
+    console.log(
+      "user has",
+      `login: ${login} email: ${email} + password: ${password}`
+    );
+    // Alert.alert("user has", `email: ${email} + password: ${password}`);
+    setLogin("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-
-    <View style={{...styles.form, paddingBottom: isShowKeyboard ? 10 : 78 }}>
-    <Image source={require('../../images/addPhoto.png')} style={styles.addPhoto}></Image>
-      <Text style={styles.title}>Реєстрація</Text>
-      <TextInput
-        style={styles.inputBox}
-        value={login}
-        placeholder="Логін"
-        onChangeText={login => setLogin(login)}
-        // defaultValue={login}
-        onFocus={() => {setIsShowKeyboard(true)}}
-        name='login'
-      />
-      <TextInput
-        style={styles.inputBox}
-        value={email}
-        placeholder="Адреса електронної пошти"
-        onChangeText={email => setEmail(email)}
-        onFocus={() => {setIsShowKeyboard(true)}}
-        name='email'
-      />
-      <View>
-      <TextInput
-        style={styles.inputBox}
-        value={password}
-        placeholder="Пароль"       
-        onChangeText={password => setPassword(password)}
-        onFocus={() => {setIsShowKeyboard(true)}}
-        name='password'
-      />
-      <Text style={styles.textClickInInput}>Показати</Text>
-      </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={sighnUp}
+      <View style={styles.container1}>
+       <ImageBackground source={BG} resizeMode="stretch" style={styles.image}> 
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        style={styles.container}
       >
-        <Text style={styles.buttonText}>Зареєструватися</Text>
-      </TouchableOpacity>
-<Text style={styles.textClick}>Вже є акаунт? Увійти</Text>
-</View>
-</KeyboardAvoidingView>
-        </TouchableWithoutFeedback>  
+        <View
+          style={{ ...styles.form, paddingBottom: isShowKeyboard ? 10 : 78 }}
+        >
+          <Image
+            source={require("../../images/addPhoto.png")}
+            style={styles.addPhoto}
+          ></Image>
+          <Text style={styles.title}>Реєстрація</Text>
+          <TextInput
+            style={[styles.inputBox, isFocused.login && styles.inputFocused]}
+            value={login}
+            placeholder="Логін"
+            onChangeText={(login) => setLogin(login)}
+            // defaultValue={login}
+            onFocus={handleFocus('login')}
+            onBlur={handleBlur('login')}
+            name="login"
+          />
+          <TextInput
+            style={[styles.inputBox, isFocused.email && styles.inputFocused]}
+            value={email}
+            placeholder="Адреса електронної пошти"
+            onChangeText={(email) => setEmail(email)}
+            onFocus={handleFocus('email')}
+            onBlur={handleBlur('email')}
+            name="email"
+          />
+          <View>
+            <TextInput
+              style={[styles.inputBox, isFocused.password && styles.inputFocused]}
+              value={password}
+              placeholder="Пароль"
+              onChangeText={(password) => setPassword(password)}
+              onFocus={handleFocus('password')}
+            onBlur={handleBlur('password')}
+              name="password"
+            />
+            <Text style={styles.textClickInInput}>Показати</Text>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={sighnUp}>
+            <Text style={styles.buttonText}>Зареєструватися</Text>
+          </TouchableOpacity>
+          <Text
+            style={styles.textClick}
+            onPress={() => {
+              navigation.navigate("LoginScreen");
+            }}
+          >
+            Вже є акаунт? Увійти
+          </Text>
+        </View>
+      </KeyboardAvoidingView>
+      </ImageBackground>
+     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  container1: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+  image: {
+    flex: 1,
+    width: "100%",
+    position: "absolute",   
+  },
   container: {
     flex: 1,
-    paddingTop: 263,  
-    justifyContent: "flex-end",    
+    paddingTop: 263,
+    justifyContent: "flex-end",
   },
 
   form: {
     flex: 1,
-    position: 'relative',
+    position: "relative",
     alignItems: "center",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    backgroundColor: "#FFFFFF",  
+    backgroundColor: "#FFFFFF",
   },
   title: {
-    fontFamily: 'Roboto-Medium',
+    fontFamily: "Roboto-Medium",
     color: "black",
     fontSize: 30,
     letterSpacing: 0.3,
@@ -108,7 +160,7 @@ const styles = StyleSheet.create({
     marginBottom: 33,
   },
   inputBox: {
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     borderColor: "#E8E8E8",
     borderWidth: 1,
@@ -116,13 +168,15 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#F6F6F6",
     borderRadius: 8,
-    padding: 16,    
+    padding: 16,
     marginBottom: 16,
-    
   },
-  button: {   
+  inputFocused: {
+    borderColor: "#FF6C00",
+  },
+  button: {
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
     width: 343,
     height: 50,
     backgroundColor: "#FF6C00",
@@ -130,26 +184,76 @@ const styles = StyleSheet.create({
     marginTop: 43,
   },
   buttonText: {
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
   textClickInInput: {
-    position: 'absolute',
+    position: "absolute",
     top: 14,
     right: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
-    color: '#1B4371',
+    color: "#1B4371",
   },
   textClick: {
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
-    color: '#1B4371',
+    color: "#1B4371",
     marginTop: 16,
   },
   addPhoto: {
-    position: 'absolute',
+    position: "absolute",
     top: -60,
-  }
+  },
 });
+
+
+// import React from "react";
+// import { NavigationContainer } from "@react-navigation/native";
+// import 'react-native-gesture-handler';
+// import { createStackNavigator } from "@react-navigation/stack";
+// import {
+//   StyleSheet,
+//   TextInput,
+//   View,
+//   Image,
+//   ImageBackground,
+//   KeyboardAvoidingView,
+//   Platform,
+//   TouchableWithoutFeedback,
+//   Keyboard,
+// } from "react-native";
+// import { useFonts } from "expo-font";
+// import { RegistrationScreen } from "./components/RegistrationScreen/RegistrationScreen.jsx";
+// import { LoginScreen } from "./components/LoginScreen/LoginScreen.jsx";
+// import { PostsScreen } from "./components/PostsScreen/PostsScreen.jsx";
+// import BG from "./images/photoBG.png";
+
+// const MainStack = createStackNavigator();
+
+// const image = { uri: "https://legacy.reactjs.org/logo-og.png" };
+
+// export default function App() {
+//   const [fontsLoaded] = useFonts({
+//     "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
+//     "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
+//     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+//   });
+//   if (!fontsLoaded) {
+//     return null;
+//   }
+//   return (
+//     // <View>
+//       /* <ImageBackground source={BG} resizeMode="stretch" style={styles.image}> */
+//     <NavigationContainer>
+//       <MainStack.Navigator initialRouteName="RegistrationScreen">
+//         <MainStack.Screen name='RegistrationScreen' component={RegistrationScreen} />
+//         <MainStack.Screen name='LoginScreen' component={LoginScreen} />
+//         <MainStack.Screen name='PostsScreen' component={PostsScreen} />
+//     </MainStack.Navigator>
+//     </NavigationContainer>
+//     // </ImageBackground>
+//     // </View>
+//   );
+// }
