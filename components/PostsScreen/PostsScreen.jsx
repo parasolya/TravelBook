@@ -1,3 +1,5 @@
+import React, {useState} from "react";
+
 import { StyleSheet } from "react-native";
 import {
   View,
@@ -12,62 +14,24 @@ import {
 } from "react-native";
 
 export const PostsScreen = () => {
+  const [userPhoto, setUserPhoto] = useState(require("../../images/avatar.jpg"));
+  const [userName, setUserName] = useState('Avatar');
+  const [userEmail, setUserEmail] = useState('avatar@gmail.com');
+
   return (
-    <View style={styles.container}>
-      {/* Heder */}
-      <View style={styles.containerHader}>
-        <Text style={styles.tytle}>Створити публікацію</Text>
-        <Image
-          source={require("../../images/arrow-left.png")}
-          style={styles.imageArrow}
-        ></Image>
-      </View>
-      {/* Body */}
-      <View>
+    
+      <View style={styles.container}>
         {/* Photo */}
-        <View style={styles.containerPhoto}>
-          <Image source={require("../../images/ellipseForCamera.png")}></Image>
-          <Image
-            source={require("../../images/camera.png")}
-            style={styles.imageCamera}
-          ></Image>
+        <View style={styles.containerUser}>
+          <Image source={userPhoto} style={styles.image} ></Image>          
+        
+        <View>
+          <Text style={styles.textName}>{userName}</Text>
+          <Text style={styles.textEmail}>{userEmail}</Text>
         </View>
-        <Text style={styles.textUnderPhoto}>Завантажте фото</Text>
+        </View>
       </View>
-      {/* Inputs */}
-      <View style={styles.containerInput}>
-        <TextInput
-          style={styles.inputBox}
-          placeholder="Назва..."
-          placeholderTextColor="#BDBDBD"
-          // onChangeText={newText => setText(newText)}
-        />
-      </View>
-      <View style={[styles.containerInput, styles.containerLocality]}>
-        <Image
-          source={require("../../images/map-pin.png")}
-          style={styles.iconMapPin}
-        ></Image>
-        <TextInput
-          style={[styles.inputBox, styles.inputlocality]}
-          placeholder="Місцевість..."
-          // onChangeText={newText => setText(newText)}
-          placeholderTextColor="#BDBDBD"
-        />
-      </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          console.log("You tapped the Decrypt button!");
-        }}
-      >
-        <Text style={styles.buttonText}>Опубліковати</Text>
-      </TouchableOpacity>
-      {/* Footer */}
-      <View style={styles.containerTrash}>
-        <Image source={require("../../images/trash.png")}></Image>
-      </View>
-    </View>
+      
   );
 };
 
@@ -75,96 +39,42 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
+    paddingTop: 32,
+    paddingRight: 16,
+     paddingBottom: 32,
+     paddingLeft: 16, 
+    // alignItems: "center",
+  }, 
+  containerUser: {
+    flexDirection: "row",    
+    height: 60,
+    // backgroundColor: "red",
+    // marginTop: 32,
+    // borderWidth: 1,
+    borderRadius: 16,
+    // borderColor: "#E8E8E8",
+    // justifyContent: "center",
     alignItems: "center",
   },
-  containerHader: {
-    width: "100%",
-    marginTop: 44,
-    borderBottomColor: "#E8E8E8",
-    borderBottomWidth: 1,
-    paddingTop: 11,
-    paddingBottom: 11,
-    alignItems: "center",
-    justifyContent: "center",
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 16,
+    marginRight: 8,
   },
-  imageArrow: {
-    width: 24,
-    height: 24,
-    position: "absolute",
-    left: 10,
-  },
-  tytle: {
-    fontFamily: "Roboto-Medium",
+  textName: {
+    fontFamily: "Roboto-Bold",
+    fontSize: 13,
     color: "#212121",
-    fontSize: 17,
+    // marginTop: 8,
+    // marginBottom: 32,
   },
-  containerPhoto: {
-    width: 343,
-    height: 240,
-    backgroundColor: "#F6F6F6",
-    marginTop: 32,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: "#E8E8E8",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imageCamera: {
-    position: "absolute",
-  },
-  textUnderPhoto: {
-    fontFamily: "Roboto-Regular",
-    fontSize: 16,
-    color: "#BDBDBD",
-    marginTop: 8,
-    marginBottom: 32,
-  },
-  inputBox: {
-    fontFamily: "Roboto-Regular",
-    fontSize: 16,
-    width: 343,
-    height: 50,
-  },
-  iconMapPin: {
-    position: "absolute",
-    marginRight: 20,
-    width: 24,
-    height: 24,
-  },
-  containerInput: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderBottomColor: "#E8E8E8",
-    borderBottomWidth: 1,
-  },
-  containerLocality: {
-    marginTop: 16,
-  },
-  inputlocality: {
-    paddingLeft: 28,
-  },
-  button: {
-    width: 343,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 343,
-    height: 50,
-    backgroundColor: "#F6F6F6",
-    borderRadius: 100,
-    marginTop: 32,
-  },
-  buttonText: {
-    fontFamily: "Roboto-Regular",
-    fontSize: 16,
-    color: "#BDBDBD",
-  },
-  containerTrash: {
-    width: 70,
-    height: 40,
-    backgroundColor: "#F6F6F6",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 20,
-    marginTop: 120,
-  },
+ textEmail: {
+  fontFamily: "Roboto-Regular",
+  fontSize: 11,
+  color: "rgba(33, 33, 33, 0.80)",
+  // marginTop: 8,
+  // marginBottom: 32,
+ },
+ 
 });

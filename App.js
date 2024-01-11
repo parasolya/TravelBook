@@ -17,7 +17,8 @@ import { useFonts } from "expo-font";
 import { RegistrationScreen } from "./components/RegistrationScreen/RegistrationScreen.jsx";
 import { LoginScreen } from "./components/LoginScreen/LoginScreen.jsx";
 import { PostsScreen } from "./components/PostsScreen/PostsScreen.jsx";
-import BG from "./images/photoBG.png";
+import { CreatePostsScreen } from "./components/CreatePostsScreen/CreatePostsScreen.jsx"
+// import BG from "../../images/photoBG.png";
 
 const MainStack = createStackNavigator();
 
@@ -41,6 +42,7 @@ export default function App() {
         <MainStack.Screen name='RegistrationScreen' component={RegistrationScreen} />
         <MainStack.Screen name='LoginScreen' component={LoginScreen} />
         <MainStack.Screen name='PostsScreen' component={PostsScreen} />
+        <MainStack.Screen name='CreatePostsScreen' component={CreatePostsScreen} />
     </MainStack.Navigator>
     </NavigationContainer> 
   
