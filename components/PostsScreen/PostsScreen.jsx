@@ -12,7 +12,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { List } from '../shared/List/List'
+import { ListPost } from '../shared/List/ListPost'
 
 export const PostsScreen = () => {
   const [userPhoto, setUserPhoto] = useState(require("../../images/avatar.jpg"));
@@ -32,7 +32,7 @@ export const PostsScreen = () => {
         </View>
         </View>
 
-        <List />
+        <ListPost />
 
       </View>
       

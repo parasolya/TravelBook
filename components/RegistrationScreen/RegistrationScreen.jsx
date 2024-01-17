@@ -114,8 +114,11 @@ export const RegistrationScreen = () => {
             style={styles.textClick}
             onPress={() => {
               // navigation.navigate("LoginScreen");
-              navigation.navigate("PostsScreen");
+              // navigation.navigate("PostsScreen");
               // navigation.navigate("CreatePostsScreen");
+              navigation.navigate('Home');
+              // navigation.navigate('Profile');
+
             }}
           >
             Вже є акаунт? Увійти
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "Roboto-Medium",
-    color: "black",
+    color: "#212121",
     fontSize: 30,
     letterSpacing: 0.3,
     textAlign: "center",
